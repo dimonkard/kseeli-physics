@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Ксения Елисеева — Репетитор по физике</title>
+  <meta name="description" content="Репетитор по физике с 7-летним стажем. Подготовка к ОГЭ, ЕГЭ и повышение успеваемости в школе.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --card-bg: rgba(255,255,255,0.98);
+      --text:#0f1720;
+      --muted:#556070;
+      --accent:#0b1320;
+      --border:#e6eaef;
+      --radius:12px;
+      --maxw:980px;
+      --base-font:16px;
+    }
+    *{box-sizing:border-box}
+    html{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:var(--base-font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+    /* Page background: embedded SVG file as background for clarity, darker tone so cards stand out */
+    body{
+      margin:0;min-height:100vh;color:var(--text);
+      background-color:#08121a;
+      background-image: url('physics_background.svg');
+      background-repeat:no-repeat;
+      background-position:center top;
+      background-size:cover;
+    }
+    @media (max-width:900px){
+      body{background-position:center 0px;background-size:cover}
+    }
+
+    /* Scroll snap container */
+    .snap-container{height:100vh;overflow-y:auto;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch}
+    .section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;scroll-snap-align:start}
+
+    /* Card */
+    .card{width:100%;max-width:var(--maxw);background:var(--card-bg);border-radius:12px;box-shadow:0 18px 48px rgba(2,6,23,0.45);border:1px solid var(--border);padding:28px;display:flex;gap:24px;align-items:flex-start;transition:transform 350ms ease, box-shadow 350ms ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 28px 68px rgba(2,6,23,0.5)}
+
+    /* Typography */
+    h1{margin:0;color:var(--accent);font-size:clamp(1.4rem, 2.6vw, 1.95rem);line-height:1.05}
+    h2{margin:6px 0 0;font-size:0.95rem;color:var(--text);border:1px solid rgba(255,255,255,0.03)}
+    p{margin:12px 0;line-height:1.6;font-size:1rem;color:var(--text)}
+    .lead{font-size:1.05rem;color:var(--muted)}
+
+    /* Photo
+       Изменено: используем aspect-ratio чтобы контейнер всегда был квадратным.
+       Для десктопа оставляем фиксированный квадрат 260x260, для мобильного — ширина 100% + aspect-ratio.
+    */
+    .photo-placeholder{
+      flex:0 0 260px;
+      width:260px;
+      aspect-ratio: 1 / 1; /* ключевая строка — делает контейнер квадратным */
+      border-radius:10px;
+      background:linear-gradient(180deg,#0f1724,#123046);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,0.04);
+      overflow:hidden;
+      position:relative;
+    }
+    .photo-placeholder img{
+      width:100%;
+      height:100%;
+      object-fit:cover; /* сохраняет пропорции, кадрирует по центру */
+      object-position:center center;
+      display:block;
+      transition:transform 450ms ease;
+    }
+    .photo-placeholder:hover img{transform:scale(1.03)}
+
+    /* Content */
+    .content{flex:1;min-width:0}
+    .features{margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .feature{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;font-size:0.95rem;color:var(--text);border:1px solid rgba(255,255,255,0.03)}
+
+    /* Price and contacts */
+    .price-row{display:flex;justify-content:space-between;align-items:center;padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));color:var(--text)}
+    .price-small{font-size:0.95rem;color:var(--muted)}
+    .contacts{display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px}
+    .contact-btn{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text);font-weight:700}
+
+    .card-sep{height:8px;width:100%;border-radius:8px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.03),transparent);margin-bottom:8px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .card{flex-direction:column;align-items:stretch;padding:20px}
+      /* На мобильном делаем фото растягивающимся по ширине, но сохраняющим квадратную форму */
+      .photo-placeholder{
+        width:100%;
+        flex-basis:auto;
+        aspect-ratio: 1 / 1; /* квадрат */
+        height:auto; /* позволяем aspect-ratio управлять высотой */
+        max-height: 420px; /* ограничение по высоте, можно подправить под нужный вид */
+      }
+      .features{grid-template-columns:1fr}
+      .feature{background:rgba(255,255,255,0.03)}
+      .price-row{color:var(--text);background:linear-gradient(180deg,#fff,#fbfdff);border-color:var(--border)}
+      .contact-btn{color:var(--accent);border-color:var(--border);background:transparent}
+    }
+    @media (max-width:420px){
+      html{font-size:15px}
+      /* на самых узких экранах чуть уменьшаем максимальную высоту фото */
+      .photo-placeholder{max-height:320px}
+      .card{padding:16px}
+    }
+
+    /* Inner scroll if content tall */
+    .card-inner{max-height:calc(100vh - 120px);overflow:auto;padding-right:8px}
+    .card-inner::-webkit-scrollbar{width:8px}
+    .card-inner::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.2);border-radius:8px}
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .card, .photo-placeholder img { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="snap-container" id="root">
+
+    <!-- Секция 1: Обо мне -->
+    <section class="section" aria-label="Обо мне">
+      <div class="card">
+        <div class="photo-placeholder" aria-hidden="false">
+          <!-- Относительный путь к фото, файл должен лежать рядом с index.html -->
+          <img alt="Ксения Елисеева — фото" src="photo_531.jpg">
+        </div>
+
+        <div class="content">
+          <div class="card-sep" aria-hidden="true"></div>
+          <div class="card-inner">
+            <h1>Елисеева Ксения Тлегеновна</h1>
+            <h2>Предлагаю услуги репетитора по физике. Готовлю к ОГЭ, ЕГЭ. </h2>
+            <p class="feature">  На моих занятиях не бывает необоснованных требований, грубости, 
+              повышения голоса. Но важным условием продуктивной работы является мотивация ученика. Преимущественно занимаюсь индивидуально онлайн в Зуме. </p>
+
+            <div class="features" role="list">
+              <div class="feature" role="listitem">✔️имею высшее педагогическое образование по специальности учитель физики, закончила с отличием (ПГПУ им. В.Г.Белинского, 2007) </div>
+              <div class="feature" role="listitem">✔️доступно объясняю материал, готовлю к экзаменам на основе открытого банка заданий ФИПИ, заданий прошлых лет </div>
+              <div class="feature" role="listitem">✔️имею опыт работы школьным учителем физики 7 лет, опыт работы экспертом по проверке ОГЭ</div>
+              <div class="feature" role="listitem">✔️регулярно прохожу повышение квалификации, слежу за изменениями в экзаменах </div>
+            </div>
+
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция 2: Прайс -->
+    <section class="section" aria-label="Прейскурант">
+      <div class="card" style="flex-direction:column;align-items:stretch;">
+        <div class="card-sep" aria-hidden="true"></div>
+        <div class="card-inner">
+          <h1 style="font-size:1.5rem;margin-bottom:6px;color:var(--text)">Прейскурант</h1>
+          <div class="price-small" style="color:var(--text)">Стоимость одного занятия (60 минут)</div>
+
+          <div class="price-list" style="margin-top:16px">
+            <div class="price-row">
+              <div>Подготовка к ОГЭ</div>
+              <div><strong>1 000 ₽</strong><div class="price-small">за 60 минут</div></div>
+            </div>
+
+            <div class="price-row">
+              <div>Подготовка к ЕГЭ</div>
+              <div><strong>1 000 ₽</strong><div class="price-small">за 60 минут</div></div>
+            </div>
+
+            <div class="price-row">
+              <div>Повышение успеваемости в школе</div>
+              <div><strong>900 ₽</strong><div class="price-small">за 60 минут</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция 3: Контакты -->
+    <section class="section" id="contacts" aria-label="Контакты">
+      <div class="card" style="flex-direction:column;align-items:flex-start;gap:16px">
+        <div class="card-sep" aria-hidden="true"></div>
+        <div class="card-inner">
+          <h1 style="font-size:1.4rem;margin-bottom:4px;color:var(--text)">Связаться</h1>
+          <div class="contact-note" style="color:var(--text)">Телефон и мессенджеры для записи и вопросов</div>
+
+          <div class="contacts" style="margin-top:12px">
+            <a class="contact-btn" href="tel:+79085204010" aria-label="Позвонить">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;stroke:currentColor;stroke-width:1.6;">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.48a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>+7 (908) 520-40-10</span>
+            </a>
+
+            <a class="contact-btn" href="https://wa.me/79085204010" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <!-- ... SVGs как было ... -->
+              <span>WhatsApp</span>
+            </a>
+
+            <a class="contact-btn" href="https://t.me/kseeli0" target="_blank" rel="noopener" aria-label="Telegram">
+              <!-- ... -->
+              <span>Telegram</span>
+            </a>
+
+            <a class="contact-btn" href="https://vk.com/phusikhelp" target="_blank" rel="noopener" aria-label="VK">
+              <!-- ... -->
+              <span>VK</span>
+            </a>
+          </div>
+
+          <div style="margin-top:10px;color:var(--muted);font-size:0.95rem">Подробности по оплате и расписанию оговариваются индивидуально.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Навигация стрелками (вверх/вниз)
+    (function(){
+      var root = document.getElementById('root');
+      var sections = Array.from(document.querySelectorAll('.section'));
+      var current = 0;
+      function scrollTo(idx){ if(idx<0||idx>=sections.length) return; sections[idx].scrollIntoView({behavior:'smooth',block:'start'}); current = idx; }
+      window.addEventListener('keydown', function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); scrollTo(Math.min(current+1,sections.length-1)); } if(e.key==='ArrowUp'){ e.preventDefault(); scrollTo(Math.max(current-1,0)); } });
+      var ticking = false; root.addEventListener('scroll', function(){ if(ticking) return; ticking = true; requestAnimationFrame(function(){ var top = root.scrollTop + 10; for(var i=0;i<sections.length;i++){ if(sections[i].offsetTop <= top && sections[i].offsetTop + sections[i].offsetHeight > top){ current = i; break; } } ticking = false; }); });
+    })();
+  </script>
+</body>
+</html>
